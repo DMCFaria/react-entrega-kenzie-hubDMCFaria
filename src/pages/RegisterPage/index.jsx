@@ -5,8 +5,37 @@ import Form from "../../components/Form";
 import Input from "../../components/Input";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { registerFormSchema } from "../../components/Form/Schema";
+import Select from "../../components/Select";
+import { useEffect, useState } from "react";
+import { api } from "../../services/api";
+import { useNavigate } from "react-router-dom";
 
-const RegisterPage = () => {
+const RegisterPage = ({ registerUser }) => {
+  const [user, setUser] = useState();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    async function checkUser() {
+      let localUser = JSON.parse(localStorage.getItem("@kenziehub: user"));
+      if (localUser) {
+        navigate("/");
+        return;
+      }
+
+      try {
+        const response = await api.get("/profile", {
+          headers: {
+            Authorization: `Bearer ${localUser}`,
+          },
+        });
+        setUser(response.data);
+      } catch (error) {
+        navigate("/register");
+      }
+    }
+    checkUser();
+  }, []);
+
   const {
     register,
     handleSubmit,
@@ -16,15 +45,14 @@ const RegisterPage = () => {
   });
 
   const submit = (formData) => {
-    console.log("teste");
     console.log(formData);
+    registerUser(formData);
   };
 
   return (
     <div>
-      <form onSubmit={handleSubmit(submit)} noValidate>
+      <Form onSubmit={handleSubmit(submit)}>
         <h2>Crie sua conta</h2>
-        <input {...register("name")} />
         <Input
           label="Nome"
           type="text"
@@ -67,17 +95,9 @@ const RegisterPage = () => {
           error={errors.contact}
           register={register("contact")}
         />
-        <select name="Selecione o Módulo" id="">
-          <option value="hiddenSelect">Selecione o Módulo</option>
-          <option value="">1º Módulo</option>
-          <option value="">2º Módulo</option>
-          <option value="">3º Módulo</option>
-          <option value="">4º Módulo</option>
-          <option value="">5º Módulo</option>
-          <option value="">6º Módulo</option>
-        </select>
+        <Select register={register("course_module")} />
         <Button type="submit">Cadastrar</Button>
-      </form>
+      </Form>
     </div>
   );
 };

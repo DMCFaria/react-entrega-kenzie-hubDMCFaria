@@ -1,4 +1,8 @@
-const Form = ({ children }) => {
-  return <form action="">{children}</form>;
+const Form = ({ children, onSubmit }) => {
+  return (
+    <form onSubmit={onSubmit} action="">
+      {children}
+    </form>
+  );
 };
 export default Form;

@@ -1,18 +1,27 @@
 import * as yup from "yup";
 
 export const registerFormSchema = yup.object().shape({
-  name: yup.string().required("Nome Obrigatório"),
+  name: yup.string().required("Nome Obrigatório."),
+
   email: yup
     .string()
-    .required("Email Obrigatório")
-    .email("O Email digitado é inválido")
-    .matches(
-      "/^(?=.*[a-z])(?=.*[A-Z])(?=.*[$*&@#])[0-9a-zA-Z$*&@#]{8,}$/",
-      "A Senha precisa ter 8 dígitos, conter letras maiúsculas e minúsculas, e conter um símbolo."
-    ),
-  password: yup.string().required("Senha Obrigatória"),
+    .required("Email Obrigatório.")
+    .email("O Email digitado é inválido."),
+
+  password: yup
+    .string()
+    .required("Senha Obrigatória.")
+    .min(8, "A senha não contém 8 digitos"),
+
   confirmPassword: yup
     .string()
-    .required("Confirmar a senha é Obrigatório")
-    .oneOf([yup.ref("password")], "As senhas não correspondem"),
+    .required("Confirmar a senha é Obrigatório.")
+    .oneOf([yup.ref("password")], "As senhas não correspondem."),
+
+  bio: yup.string().required("Bio Obrigatória."),
+
+  contact: yup.string().required("É necessário um meio para contato."),
+  course_module: yup
+    .string()
+    .required("É necessário informar o módulo cursado"),
 });
