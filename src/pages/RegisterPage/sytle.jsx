@@ -41,7 +41,7 @@ const STYLED_REGISTERPAGE = styled.div`
     border-radius: 4px;
   }
   div:hover {
-    background-color: #383b3f;
+    background-color: #3e4146;
   }
   a {
     text-decoration: none !important;
