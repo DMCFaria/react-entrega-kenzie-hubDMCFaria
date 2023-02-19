@@ -5,7 +5,9 @@ import Button from "../../components/Button";
 import { useForm } from "react-hook-form";
 import { useState, useEffect } from "react";
 import { api } from "../../services/api";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
+import STYLED_LOGINPAGE from "./sytle";
+import NavBar from "../../components/NavBar";
 
 const LoginPage = ({ loginUser }) => {
   const [user, setUser] = useState();
@@ -13,7 +15,7 @@ const LoginPage = ({ loginUser }) => {
 
   useEffect(() => {
     async function checkUser() {
-      let localUser = JSON.parse(localStorage.getItem("@kenziehub: user"));
+      let localUser = JSON.parse(localStorage.getItem("@TOKEN"));
       if (localUser) {
         navigate("/");
         return;
@@ -39,9 +41,10 @@ const LoginPage = ({ loginUser }) => {
     loginUser(formData);
   };
   return (
-    <div>
+    <STYLED_LOGINPAGE>
+      <NavBar></NavBar>
       <Form onSubmit={handleSubmit(submit)}>
-        <h2>Entre na sua conta</h2>
+        <h2>Login</h2>
         <Input
           label="Email"
           type="email"
@@ -54,11 +57,15 @@ const LoginPage = ({ loginUser }) => {
           placeholder="Digite aqui sua senha"
           register={register("password")}
         ></Input>
-        <Button type="submit">Entrar</Button>
+        <Button classname="login_btn" type="submit">
+          Entrar
+        </Button>
         <h4>Ainda não possui conta?</h4>
-        <Button>Cadastre-se</Button>
+        <div>
+          <Link to="/register">Cadastre-se</Link>
+        </div>
       </Form>
-    </div>
+    </STYLED_LOGINPAGE>
   );
 };
 export default LoginPage;

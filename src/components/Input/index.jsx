@@ -1,6 +1,8 @@
+import STYLED_INPUT from "./style";
+
 const Input = ({ type, label, placeholder, register, error }) => {
   return (
-    <fieldset>
+    <STYLED_INPUT>
       {label && <label htmlFor={register.name}>{label}</label>}
       {label && (
         <input
@@ -11,7 +13,7 @@ const Input = ({ type, label, placeholder, register, error }) => {
         />
       )}
       {error && <p>{error.message}</p>}
-    </fieldset>
+    </STYLED_INPUT>
   );
 };
 export default Input;

@@ -8,7 +8,9 @@ import { registerFormSchema } from "../../components/Form/Schema";
 import Select from "../../components/Select";
 import { useEffect, useState } from "react";
 import { api } from "../../services/api";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
+import NavBar from "../../components/NavBar";
+import STYLED_REGISTERPAGE from "./sytle";
 
 const RegisterPage = ({ registerUser }) => {
   const [user, setUser] = useState();
@@ -16,12 +18,11 @@ const RegisterPage = ({ registerUser }) => {
 
   useEffect(() => {
     async function checkUser() {
-      let localUser = JSON.parse(localStorage.getItem("@kenziehub: user"));
+      let localUser = JSON.parse(localStorage.getItem("@TOKEN"));
       if (localUser) {
         navigate("/");
         return;
       }
-
       try {
         const response = await api.get("/profile", {
           headers: {
@@ -50,7 +51,14 @@ const RegisterPage = ({ registerUser }) => {
   };
 
   return (
-    <div>
+    <STYLED_REGISTERPAGE>
+      <section>
+        <NavBar>
+          <div>
+            <Link to="/login">Voltar</Link>
+          </div>
+        </NavBar>
+      </section>
       <Form onSubmit={handleSubmit(submit)}>
         <h2>Crie sua conta</h2>
         <Input
@@ -95,10 +103,13 @@ const RegisterPage = ({ registerUser }) => {
           error={errors.contact}
           register={register("contact")}
         />
+
         <Select register={register("course_module")} />
-        <Button type="submit">Cadastrar</Button>
+        <Button classname="register_btn" type="submit">
+          Cadastrar
+        </Button>
       </Form>
-    </div>
+    </STYLED_REGISTERPAGE>
   );
 };
 export default RegisterPage;

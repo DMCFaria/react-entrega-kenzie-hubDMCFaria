@@ -23,13 +23,10 @@ const AppRoutes = () => {
   const loginUser = async (formData) => {
     try {
       const response = await api.post("/sessions", formData);
-      console.log(response.data);
-      localStorage.setItem(
-        "@kenziehub: user",
-        JSON.stringify(response.data.token)
-      );
-      toast.success("Login realizado!");
+      localStorage.setItem("@TOKEN", JSON.stringify(response.data.token));
+      localStorage.setItem("@USERID", JSON.stringify(response.data.user.id));
       navigate("/");
+      toast.success("Login realizado!");
     } catch (error) {
       toast.error("Login não realizado, verifique o e-mail e a senha!");
     }
