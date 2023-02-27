@@ -16,6 +16,26 @@ const DashboardPage = (user) => {
     navigate("/login");
     toast.success("Sessão encerrada!");
   };
+
+  useEffect(() => {
+    async function checkUser() {
+      let localUser = JSON.parse(localStorage.getItem("@TOKEN"));
+      if (!localUser) {
+        navigate("/login");
+        return;
+      }
+      try {
+        const response = await api.get("/profile", {
+          headers: {
+            Authorization: `Bearer ${localUser}`,
+          },
+        });
+      } catch (error) {
+        navigate("/login");
+      }
+    }
+    checkUser();
+  }, []);
   return (
     <STYLED_DASHBOARD>
       <NavBar classname="Nav_dash">
