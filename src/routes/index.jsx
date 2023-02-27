@@ -4,9 +4,11 @@ import LoginPage from "../pages/LoginPage";
 import RegisterPage from "../pages/RegisterPage";
 import { api } from "../services/api";
 import { toast } from "react-toastify";
-
+import { UserContext } from "../components/Providers/UserContext";
+import { useContext } from "react";
 const AppRoutes = () => {
   const navigate = useNavigate();
+  const user = useContext(UserContext);
 
   const registerUser = async (formData) => {
     try {
@@ -15,7 +17,6 @@ const AppRoutes = () => {
       navigate("/login");
       toast.success("Registro realizado!");
     } catch (error) {
-      console.log(error);
       toast.error("Não foi possível cadastrar o usuário. Tente novamente!");
     }
   };
@@ -34,7 +35,7 @@ const AppRoutes = () => {
   return (
     <>
       <Routes>
-        <Route path="/" element={<DashboardPage />} />
+        <Route path="/" element={<DashboardPage user={user} />} />
         <Route path="/login" element={<LoginPage loginUser={loginUser} />} />
         <Route
           path="/register"

@@ -1,0 +1,46 @@
+.modal-overlay {
+    background: #12121481 !important;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-family: "Inter", sans-serif;
+}
+
+.modal-overlay>div>section {
+    background: #212529;
+
+}
+
+.modal-overlay>div>section>div {
+    display: flex;
+    padding-left: 10px;
+    padding-right: 10px;
+    justify-content: space-between;
+    align-items: center;
+    background: #343B41;
+}
+
+.modal-overlay>div>section>div>h4,
+.modal-overlay>div>section>div>h2 {
+    display: flex;
+    margin-block-start: 0;
+    margin-block-end: 0;
+    margin: 10px;
+    color: #F8F9FA;
+
+}
+
+.modal-overlay>div>section>form {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    color: white;
+}

@@ -25,3 +25,8 @@ export const registerFormSchema = yup.object().shape({
     .string()
     .required("É necessário informar o módulo cursado"),
 });
+
+export const TechFormSchema = yup.object().shape({
+  title: yup.string().required("A tecnologia precisa de um nome"),
+  status: yup.string().required("É necessário informar o seu Nível"),
+});

@@ -104,7 +104,25 @@ const RegisterPage = ({ registerUser }) => {
           register={register("contact")}
         />
 
-        <Select register={register("course_module")} />
+        <Select register={register("course_module")}>
+          <option value="hiddenSelect">Selecione o Módulo</option>
+          <option value="Primeiro Módulo (Introdução ao Front-End)">
+            1º Módulo
+          </option>
+          <option value="Segundo Módulo (Intermédio de Front-End)">
+            2º Módulo
+          </option>
+          <option value="Terceiro Módulo (Avançado de Front-End)">
+            3º Módulo
+          </option>
+          <option value="Quarto Módulo (Introdução ao Back-End)m4">
+            4º Módulo
+          </option>
+          <option value="Quinto Módulo (Intermédio de Back-End)">
+            5º Módulo
+          </option>
+          <option value="Sexto Módulo (Avançado de Back-End)">6º Módulo</option>
+        </Select>
         <Button classname="register_btn" type="submit">
           Cadastrar
         </Button>

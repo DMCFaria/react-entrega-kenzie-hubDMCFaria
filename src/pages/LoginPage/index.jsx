@@ -27,7 +27,6 @@ const LoginPage = ({ loginUser }) => {
             Authorization: `Bearer ${localUser}`,
           },
         });
-        setUser(response.data);
       } catch (error) {
         navigate("/login");
       }
